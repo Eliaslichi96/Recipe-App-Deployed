@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <title>{{ object.name }} Details</title>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'recipes:home' %}">Home</a></li>
+            <li><a href="{% url 'recipes:recipes-list' %}">Recipe List</a></li>
+            <li><a href="{% url 'recipes:recipe-create' %}">Create Recipe</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="flex-container">
+        <div class="center-div">
+            <div class="recipes-container-details">
+                <div class="top-notch-details"></div>
+                <div class="top-details-holder">
+                    <h2 class="details-header">{{ object.name }}</h2>
+                    <img src="{{ object.pic.url }}" class="recipe-image-details">
+                </div>
+                <div class="description-holder">
+                    <p class="details-description">{{ object.description }}</p>
+                </div>
+                <div class="ingredients-details">
+                    <p class="ingredients-details-list"><span class="sub-header">Ingredients: </span></p>
+                    <ul>
+                        {% for ingredient in ingredients_list %}
+                        <li>{{ ingredient }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="time-and-difficulty">
+                    <p><span class="sub-header">Cooking Time: </span>{{ object.cooking_time }} mins</p>
+                    <p><span class="sub-header">Difficulty: </span>{{ object.difficulty }}</p>
+                </div>
+                <div class="details-button-holder">
+                    <a href="{% url 'recipes:recipes-list' %}" class="back-button">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>

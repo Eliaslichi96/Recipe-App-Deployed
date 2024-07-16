@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout Success</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            background-size: cover;
+            color: #fff;
+        }
+
+        .message-box {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .message-box h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .message-box p {
+            margin-bottom: 20px;
+        }
+
+        .message-box a {
+            text-decoration: none;
+            color: #ff6347;
+            padding: 10px 20px;
+            border: 2px solid #ff6347;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            margin-right: 10px;
+        }
+
+        .message-box a:hover {
+            background-color: #ff6347;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="message-box">
+        <h1>You've successfully logged out</h1>
+        <p>Thank you for visiting our Recipe App.</p>
+        <a href="{% url 'login' %}">Log back in</a>
+        <a href="{% url 'recipes:recipes-list' %}">View Recipes</a>
+    </div>
+</body>
+
+</html>

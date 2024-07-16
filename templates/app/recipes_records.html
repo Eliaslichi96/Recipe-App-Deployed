@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Search Recipes</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'recipes:home' %}">Home</a></li>
+            <li><a href="{% url 'recipes:recipes-list' %}">Recipe List</a></li>
+            <li><a href="{% url 'recipes:recipe-create' %}">Create Recipe</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+        </ul>
+    </nav>
+    <h1>Search Recipes</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Search</button>
+    </form>
+
+    {% if recipes %}
+    <h2>Results:</h2>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Cooking Time</th>
+            <th>Difficulty</th>
+        </tr>
+        {% for recipe in recipes %}
+        <tr>
+            <td><a href="{{ recipe.get_absolute_url }}">{{ recipe.name }}</a></td>
+            <td>{{ recipe.cooking_time }}</td>
+            <td>{{ recipe.difficulty }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    {% if chart %}
+    <h2>Chart:</h2>
+    <img src="data:image/png;base64,{{ chart }}" alt="chart">
+    {% endif %}
+
+    <!-- Add a button to go back to the recipes list -->
+    <div class="button-holder">
+        <a href="{% url 'recipes:recipes-list' %}" class="recipe-button">Back to Recipe List</a>
+    </div>
+
+</body>
+
+</html>
