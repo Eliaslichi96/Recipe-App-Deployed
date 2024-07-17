@@ -1,5 +1,6 @@
 <!-- templates/about.html -->
 {% load static %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,11 +56,10 @@
             <li><a href="{% url 'recipes:records' %}">Search</a></li>
             <li><a href="{% url 'about' %}">About Me</a></li>
             <li><a href="{% url 'logout' %}">Logout</a></li>
-
         </ul>
     </nav>
     <div class="about-container">
-        <img src="{% static 'media/IMG_2210.JPG' %}" alt="My Picture" class="profile-pic">
+        <img src="{{ MEDIA_URL }}IMG_2210.JPG" alt="My Picture" class="profile-pic">
         <h1>About Me</h1>
         <p>Hello! My name is Elias. And This is a Django-based web application for managing recipes. Users can create,
             view,
@@ -69,7 +69,6 @@
         <p>You can view my full portfolio <a href="https://eliaslichi96.github.io/portfolio-website/"
                 target="_blank">HERE</a>.</p>
     </div>
-
 </body>
 
 </html>
