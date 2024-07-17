@@ -166,4 +166,4 @@ cython_debug/
 *.sqlite3
 
 # .gitignore
-settings.py
+.env
