@@ -5,6 +5,9 @@ from django.contrib.auth import authenticate, login, logout
 #Django Form for authentication
 from django.contrib.auth.forms import AuthenticationForm    
 
+from django.shortcuts import render
+
+
 #define a function view called login_view that takes a request from user
 def login_view(request):
    #initialize:
@@ -48,3 +51,6 @@ def logout_view(request):
 
 def logout_success(request):
     return render(request, 'auth/success.html')
+
+def about(request):
+    return render(request, 'about.html')
