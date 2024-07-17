@@ -37,6 +37,6 @@ This is a Django-based web application for managing recipes. Users can create, v
 1. Clone this repository.
 2. Navigate to the recipe-app folder and run make install-dev
 3. Setup Database by configuring DATABASES in the settings folder in dev.py for development.
-4. Run migrations with make dev-migrate
+4. Run migrations with make dev-migrate.
 5. Create a superuser by running make dev-superuser
 6. Run make dev-start to check out the app in your browser under http://127.0.0.1:8000
