@@ -47,3 +47,45 @@ class RecipeViewTest(TestCase):
         response = self.client.get(reverse('recipes:recipes-list') + '?page=2')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context['object_list']), 3)  # 13 total recipes, 10 on first page, 3 on second page
+
+    def test_recipe_detail_view(self):
+        recipe = Recipe.objects.get(id=1)
+        response = self.client.get(reverse('recipes:recipe-detail', args=[str(recipe.id)]))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, recipe.name)
+
+    def test_recipe_create_view(self):
+        self.client.login(username='testuser', password='12345')
+        response = self.client.post(reverse('recipes:recipe-create'), {
+            'name': 'New Recipe',
+            'ingredients': 'Ingredient 1, Ingredient 2',
+            'cooking_time': 30,
+            'description': 'Test description',
+            'difficulty': 'Easy',
+            'pic': 'recipes/no_picture'
+        })
+        self.assertEqual(response.status_code, 302)  # Redirects after creation
+        self.assertEqual(Recipe.objects.last().name, 'New Recipe')
+
+    def test_recipe_update_view(self):
+        self.client.login(username='testuser', password='12345')
+        recipe = Recipe.objects.get(id=1)
+        response = self.client.post(reverse('recipes:recipe-update', args=[str(recipe.id)]), {
+            'name': 'Updated Recipe',
+            'ingredients': 'Ingredient 1, Ingredient 2',
+            'cooking_time': 30,
+            'description': 'Updated description',
+            'difficulty': 'Easy',
+            'pic': 'recipes/no_picture'
+        })
+        self.assertEqual(response.status_code, 302)  # Redirects after update
+        recipe.refresh_from_db()
+        self.assertEqual(recipe.name, 'Updated Recipe')
+        self.assertEqual(recipe.description, 'Updated description')
+
+    def test_recipe_delete_view(self):
+        self.client.login(username='testuser', password='12345')
+        recipe = Recipe.objects.get(id=1)
+        response = self.client.post(reverse('recipes:recipe-delete', args=[str(recipe.id)]))
+        self.assertEqual(response.status_code, 302)  # Redirects after deletion
+        self.assertFalse(Recipe.objects.filter(id=1).exists())
