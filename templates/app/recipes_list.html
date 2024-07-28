@@ -80,13 +80,6 @@
     </nav>
     <h1>Recipe List</h1>
 
-    <!-- Search Form -->
-    <form method="post" action="{% url 'recipes:records' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Search</button>
-    </form>
-
     <table border="1" cellpadding="5" cellspacing="5">
         <tr>
             <td>Recipe Title</td>
